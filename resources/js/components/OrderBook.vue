@@ -49,7 +49,7 @@
             :key="order.id"
             class="flex justify-between items-center bg-red-900/20 p-3 rounded-lg hover:bg-red-900/30 transition-all border-2 border-red-900/30"
           >
-            <span class="text-red-400 font-mono font-semibold">${{ Number(order.price).toFixed(2) }}</span>
+            <span class="text-red-400 font-mono text-xs">${{ Number(order.price).toFixed(2) }}</span>
             <span class="text-gray-300 font-mono text-sm">{{ Number(order.amount).toFixed(8) }}</span>
             <span class="text-gray-400 text-xs bg-gray-800 px-2 py-1 rounded border border-gray-700">${{ (order.price * order.amount).toFixed(2) }}</span>
           </div>

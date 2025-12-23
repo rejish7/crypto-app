@@ -19,6 +19,7 @@ class OrderController extends Controller
         $symbol = $request-> query('symbol');
 
         $query = Order::with('user:id,name');
+            // ->where('status', 1); if needed for only to display the ongoing sell/buy
 
         if ($symbol) {
             $query->where('symbol', $symbol);

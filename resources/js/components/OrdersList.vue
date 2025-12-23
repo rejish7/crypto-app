@@ -93,19 +93,19 @@
         <div class="grid grid-cols-2 gap-3 text-sm mb-3">
           <div class="bg-gray-800 px-3 py-2 rounded-lg border border-gray-600">
             <div class="text-gray-400 text-xs mb-1">Price</div>
-            <div class="text-white font-mono font-semibold">${{ Number(order.price).toFixed(2) }}</div>
+            <div class="text-white text-xs">${{ Number(order.price).toFixed(2) }}</div>
           </div>
           <div class="bg-gray-800 px-3 py-2 rounded-lg border border-gray-600">
             <div class="text-gray-400 text-xs mb-1">Amount</div>
-            <div class="text-white font-mono font-semibold">{{ Number(order.amount).toFixed(8) }}</div>
+            <div class="text-white text-xs ">{{ Number(order.amount).toFixed(8) }}</div>
           </div>
           <div class="bg-gray-800 px-3 py-2 rounded-lg border border-gray-600">
             <div class="text-gray-400 text-xs mb-1">Total</div>
-            <div class="text-white font-mono font-semibold">${{ (order.price * order.amount).toFixed(2) }}</div>
+            <div class="text-white text-xs">${{ (order.price * order.amount).toFixed(2) }}</div>
           </div>
           <div class="bg-gray-800 px-3 py-2 rounded-lg border border-gray-600">
             <div class="text-gray-400 text-xs mb-1">Date</div>
-            <div class="text-white text-xs">{{ formatDate(order.created_at) }}</div>
+            <div class="text-white ">{{ formatDate(order.created_at) }}</div>
           </div>
         </div>
 
