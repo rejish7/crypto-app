@@ -20,16 +20,18 @@ class DatabaseSeeder extends Seeder
         $buyer = User::factory()->create([
             'name' => 'Test Buyer',
             'email' => 'buyer@example.com',
-            'balance' => 100000.00, 
+            'password' => bcrypt('password'),
+            'balance' => 100000.00,
         ]);
 
         $seller = User::factory()->create([
             'name' => 'Test Seller',
             'email' => 'seller@example.com',
-            'balance' => 50000.00, 
+            'password' => bcrypt('password'),
+            'balance' => 50000.00,
         ]);
 
-        // seller  BTC and ETH
+        // Give seller BTC and ETH
         Asset::create([
             'user_id' => $seller->id,
             'symbol' => 'BTC',
@@ -45,7 +47,18 @@ class DatabaseSeeder extends Seeder
         ]);
 
         $this->command->info('Database seeded successfully!');
-        $this->command->info('Buyer: buyer@example.com | Balance: $100,000');
-        $this->command->info('Seller: seller@example.com | Balance: $50,000 | BTC: 1.0 | ETH: 10.0');
+        $this->command->info('');
+        $this->command->info('===== TEST ACCOUNTS =====');
+        $this->command->info('Buyer Account:');
+        $this->command->info('  Email: buyer@example.com');
+        $this->command->info('  Password: password');
+        $this->command->info('  Balance: $100,000');
+        $this->command->info('');
+        $this->command->info('Seller Account:');
+        $this->command->info('  Email: seller@example.com');
+        $this->command->info('  Password: password');
+        $this->command->info('  Balance: $50,000');
+        $this->command->info('  Assets: 1.0 BTC, 10.0 ETH');
+        $this->command->info('=========================');
     }
 }

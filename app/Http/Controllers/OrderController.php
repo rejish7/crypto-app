@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers; 
+namespace App\Http\Controllers;
 use App\Http\Requests\CreateOrderRequest;
 use App\Models\Order;
 use App\Services\OrderService;
@@ -18,8 +18,7 @@ class OrderController extends Controller
     {
         $symbol = $request-> query('symbol');
 
-        $query = Order::with('user:id,name')
-            ->where('status',Order::STATUS_OPEN);
+        $query = Order::with('user:id,name');
 
         if ($symbol) {
             $query->where('symbol', $symbol);
@@ -29,11 +28,7 @@ class OrderController extends Controller
             ->orderBy('created_at','asc')
             ->get();
 
-        return response()->json
-        ([
-            'buy'=>$orders->where('side', 'buy')->values(),
-            'sell'=>$orders->where('side', 'sell')->values(),
-        ]);
+        return response()->json($orders);
     }
 
     public function store(CreateOrderRequest $request)
