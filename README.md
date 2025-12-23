@@ -278,20 +278,8 @@ crypto-api/
 8. Optional: Record trade in `trades` table
 9. **Broadcast `OrderMatched` event** to both users via Pusher
 
-### Commission Details
-- **Rate**: 1.5% of matched USD value
-- **Example**: 
-  - 0.01 BTC @ 95,000 USD = 950 USD volume
-  - Fee = 950 × 0.015 = 14.25 USD
-  - Must be deducted consistently from buyer or seller
 
-### Order Cancellation
-1. Verify order belongs to user and `status=1` (open)
-2. If **Buy Order**: Release locked USD back to `users.balance`
-3. If **Sell Order**: Release locked assets back to `assets.amount`
-4. Update order: `status=3` (cancelled)
-
-## Real-Time Integration (Mandatory)
+## Real-Time Integration 
 
 ### Pusher Broadcasting Setup
 
@@ -391,21 +379,7 @@ Must subscribe to `private-user.{id}` channel and listen for `OrderMatched` even
 - **SQL Injection Prevention**: Eloquent ORM with parameterized queries
 - **XSS Protection**: Vue.js automatic escaping
 
-## Testing
 
-Run the test suite:
-```bash
-php artisan test
-```
-
-Run specific test types:
-```bash
-# Unit tests only
-php artisan test --testsuite=Unit
-
-# Feature tests only
-php artisan test --testsuite=Feature
-```
 
 ## Troubleshooting
 
@@ -532,11 +506,7 @@ This project is developed for educational and evaluation purposes.
 - Real-time updates via Pusher private channels
 - Complete orderbook and wallet management
 
-## Support
 
-For questions or evaluation clarifications, please contact the development team or open an issue.
-
----
 
 ## Implementation Notes for Evaluators
 
@@ -552,6 +522,4 @@ Using Pusher's private channels ensures each user only receives their own trade 
 ### Frontend Architecture
 Built with Vue 3 Composition API for cleaner, more maintainable code. Tailwind CSS provides a consistent, modern design system. The two main screens (Order Form and Overview) are separated but share state management through the API service layer.
 
----
 
-**Note**: This is a demonstration project for evaluation purposes. It implements all required features including order matching, commission system, locked balances, and real-time Pusher integration as specified in the project requirements.
