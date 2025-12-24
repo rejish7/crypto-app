@@ -26,7 +26,7 @@
     <div v-else-if="profile" class="space-y-4">
       <!-- USD Balance -->
       <div class="bg-gray-700 p-6 rounded-xl border-2 border-green-600 shadow-lg">
-        <div class="flex justify-between items-center mb-4">
+        <div class="flex justify-between items-center">
           <div>
             <p class="text-gray-400 text-sm font-medium mb-1">Available Balance</p>
             <span class="text-4xl font-bold text-green-400">
@@ -37,123 +37,6 @@
             <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-          </div>
-        </div>
-
-        <!-- Load Money Section -->
-        <div class="mt-4 pt-4 border-t-2 border-gray-600">
-          <button
-            @click="showLoadModal = true"
-            class="w-full px-4 py-3 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold transition-all shadow-lg"
-          >
-            Load Money
-          </button>
-        </div>
-      </div>
-
-      <!-- Load Money Modal -->
-      <div v-if="showLoadModal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-        <div class="bg-gray-800 rounded-2xl p-6 max-w-md w-full mx-4 border-2 border-gray-700 shadow-2xl">
-          <div class="flex justify-between items-center mb-6">
-            <h3 class="text-2xl font-bold text-white">Deposit Funds</h3>
-            <button
-              @click="showLoadModal = false"
-              class="p-2 text-gray-400 hover:text-white hover:bg-gray-700 rounded-lg transition"
-            >
-              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          </div>
-
-          <!-- Amount Input -->
-          <div class="mb-4">
-            <label class="block text-sm font-semibold text-gray-300 mb-2">Amount (USD)</label>
-            <input
-              v-model.number="loadAmount"
-              type="number"
-              placeholder="Enter amount"
-              min="1"
-              max="100000"
-              class="w-full px-4 py-3 bg-gray-700 text-white rounded-xl border-2 border-gray-600 focus:border-blue-500 focus:outline-none transition"
-            />
-            <div class="grid grid-cols-4 gap-2 mt-3">
-              <button
-                v-for="quick in [100, 500, 1000, 10000]"
-                :key="quick"
-                @click="loadAmount = quick"
-                class="px-3 py-2 bg-gray-700 hover:bg-blue-600 text-white rounded-lg text-sm font-medium transition border border-gray-600"
-              >
-                ${{ quick }}
-              </button>
-            </div>
-          </div>
-
-          <!-- Payment Method -->
-          <div class="mb-4">
-            <label class="block text-sm font-semibold text-gray-300 mb-2">Payment Method</label>
-            <select
-              v-model="paymentMethod"
-              class="w-full px-4 py-3 bg-gray-700 text-white rounded-xl border-2 border-gray-600 focus:border-blue-500 focus:outline-none transition"
-            >
-              <option value="credit_card">Credit Card</option>
-              <option value="bank_transfer">Bank Transfer</option>
-              <option value="crypto">Crypto (USDT)</option>
-              <option value="paypal">PayPal</option>
-            </select>
-          </div>
-
-          <!-- Payment Method Details -->
-          <div class="mb-6 p-4 bg-blue-900/30 border-2 border-blue-700 rounded-xl text-sm text-gray-300">
-            <div v-if="paymentMethod === 'credit_card'">
-              <div class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                </svg>
-                <span>Credit/Debit Card payment will be processed securely</span>
-              </div>
-            </div>
-            <div v-else-if="paymentMethod === 'bank_transfer'">
-              <div class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" />
-                </svg>
-                <span>Bank transfer instructions will be sent to your email</span>
-              </div>
-            </div>
-            <div v-else-if="paymentMethod === 'crypto'">
-              <div class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>USDT deposit address will be provided after confirmation</span>
-              </div>
-            </div>
-            <div v-else-if="paymentMethod === 'paypal'">
-              <div class="flex items-start gap-2">
-                <svg class="w-5 h-5 text-blue-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-                <span>You will be redirected to PayPal for secure payment</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="flex gap-3">
-            <button
-              @click="showLoadModal = false"
-              class="flex-1 px-4 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-xl font-semibold transition border border-gray-600"
-            >
-              Cancel
-            </button>
-            <button
-              @click="handleLoadMoney"
-              :disabled="loadingMoney || !loadAmount || loadAmount < 1"
-              class="flex-1 px-4 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white rounded-xl font-semibold transition shadow-lg"
-            >
-              {{ loadingMoney ? 'Processing...' : 'Confirm Deposit' }}
-            </button>
           </div>
         </div>
       </div>
@@ -218,8 +101,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps, defineEmits } from 'vue';
-import api from '../services/api';
+import { defineProps, defineEmits } from 'vue';
 
 defineProps({
   profile: {
@@ -233,33 +115,4 @@ defineProps({
 });
 
 const emit = defineEmits(['refresh']);
-
-const showLoadModal = ref(false);
-const loadAmount = ref(1000);
-const paymentMethod = ref('credit_card');
-const loadingMoney = ref(false);
-
-const handleLoadMoney = async () => {
-  if (!loadAmount.value || loadAmount.value < 1) return;
-
-  loadingMoney.value = true;
-  try {
-    await api.post('/load-money', {
-      amount: loadAmount.value,
-      payment_method: paymentMethod.value
-    });
-
-    showLoadModal.value = false;
-    loadAmount.value = 1000;
-    paymentMethod.value = 'credit_card';
-    emit('refresh');
-
-    alert(`Successfully loaded $${loadAmount.value} via ${paymentMethod.value.replace('_', ' ')}`);
-  } catch (err) {
-    console.error('Failed to load money:', err);
-    alert('Failed to load money');
-  } finally {
-    loadingMoney.value = false;
-  }
-};
 </script>

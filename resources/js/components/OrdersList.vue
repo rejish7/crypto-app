@@ -143,7 +143,7 @@ const props = defineProps({
 
 const emit = defineEmits(['cancel-order']);
 
-const selectedStatus = ref(null);
+const selectedStatus = ref(1); // Default to "Open" tab
 
 const statuses = [
   { value: null, label: 'All' },
